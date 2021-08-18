@@ -50,7 +50,7 @@
   args:
     executable: python3
   environment:
-    GOOGLE_APPLICATION_CREDENTIALS: "{{ service_account_file | default(lookup('env', 'GCP_SERVICE_ACCOUNT_FILE')) }}"
+    GOOGLE_APPLICATION_CREDENTIALS: "{{ molecule_yml.driver.service_account_file | default(lookup('env', 'GCP_SERVICE_ACCOUNT_FILE'), true) }}"
   loop: "{{ molecule_yml.platforms }}"
   changed_when:
     - password.rc == 0
